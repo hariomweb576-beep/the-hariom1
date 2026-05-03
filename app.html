@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGD OX Tool</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+background:#05070d;
+color:#fff;
+font-family:system-ui;
+}
+
+/* NAV */
+nav{
+height:60px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+backdrop-filter:blur(10px);
+background:rgba(10,10,20,0.4);
+}
+.menu{
+width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+
+/* TITLE */
+.header{
+text-align:center;
+padding:20px;
+}
+.header h1{
+font-size:22px;
+background:linear-gradient(90deg,#00f0ff,#a855f7);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* TOOL */
+.tool{
+margin:10px;
+padding:14px;
+background:rgba(255,255,255,0.05);
+border-radius:16px;
+backdrop-filter:blur(10px);
+}
+.row{
+display:flex;
+gap:10px;
+}
+input{
+flex:1;
+padding:10px;
+border-radius:20px;
+border:none;
+outline:none;
+background:#111;
+color:#fff;
+}
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:linear-gradient(90deg,#00f0ff,#a855f7);
+color:#fff;
+cursor:pointer;
+}
+
+/* PREVIEW */
+.preview{
+margin-top:10px;
+}
+video,img{
+width:100%;
+border-radius:10px;
+}
+
+/* LOADER */
+.loader{
+display:none;
+margin-top:10px;
+border:3px solid #333;
+border-top:3px solid #00f0ff;
+border-radius:50%;
+width:30px;height:30px;
+animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ERROR */
+.error{
+display:none;
+background:#ff003355;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.6);
+display:none;
+align-items:center;
+justify-content:center;
+}
+.modalBox{
+background:#111;
+padding:20px;
+border-radius:12px;
+}
+.modal a{display:block;margin:6px 0;color:#00f0ff;text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h3>IGD OX</h3>
+<div class="menu" onclick="openModal()">⋮</div>
+</nav>
+
+<div class="header">
+<h1>Instagram Downloader Tool</h1>
+<p>Fast & premium downloader by Hariom</p>
+</div>
+
+<div class="tool">
+<div class="row">
+<input id="url" placeholder="Paste Instagram link">
+<button onclick="fetchMedia()">Fetch</button>
+</div>
+
+<div class="loader" id="loader"></div>
+<div class="error" id="error"></div>
+
+<div class="preview" id="preview"></div>
+</div>
+
+<div class="modal" id="modal">
+<div class="modalBox">
+<h3>Meet Developer</h3>
+<p>Hariom</p>
+
+<a target="_blank" href="https://www.snapchat.com/add/we_lucifer01?share_id=fw0rX0LsFtU&locale=en-IN">
+Snapchat: we_lucifer01
+</a>
+
+<a target="_blank" href="https://www.instagram.com/_.hariom_.017?igsh=MTNyaDhtajIxODJ0cA==">
+Instagram Profile
+</a>
+
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script>
+function openModal(){
+document.getElementById("modal").style.display="flex"
+}
+function closeModal(){
+document.getElementById("modal").style.display="none"
+}
+
+async function fetchMedia(){
+const url=document.getElementById("url").value.trim()
+const loader=document.getElementById("loader")
+const error=document.getElementById("error")
+const preview=document.getElementById("preview")
+
+error.style.display="none"
+preview.innerHTML=""
+
+if(!url){
+error.innerText="Enter URL"
+error.style.display="block"
+return
+}
+
+loader.style.display="block"
+
+try{
+const res=await fetch(`https://mixy-ox-enjoy.vercel.app/?url=${url}`)
+const data=await res.json()
+
+loader.style.display="none"
+
+let media=data.url||data.video_url||data.media||data?.data?.[0]?.url||data?.urls?.[0]
+
+if(!media){
+throw new Error()
+}
+
+if(data.type==="video" || media.includes("mp4")){
+preview.innerHTML=`<video controls src="${media}"></video>`
+}else{
+preview.innerHTML=`<img src="${media}">`
+}
+
+let a=document.createElement("a")
+a.href=media
+a.download="IGD_OX_"+Date.now()
+a.click()
+
+}catch(e){
+loader.style.display="none"
+error.innerText="Failed to fetch media"
+error.style.display="block"
+}
+}
+</script>
+
+</body>
+</html>

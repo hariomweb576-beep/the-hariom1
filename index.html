@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGD OX – Premium Instagram Downloader</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+background:#05070d;
+color:#fff;
+font-family:system-ui;
+overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+height:60px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:fixed;
+width:100%;
+top:0;
+z-index:10;
+backdrop-filter:blur(10px);
+background:rgba(10,10,20,0.4);
+}
+nav h1{
+font-size:18px;
+letter-spacing:2px;
+background:linear-gradient(90deg,#00f0ff,#a855f7);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* HERO */
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:80px 5vw 40px;
+gap:20px;
+}
+.left{
+max-width:50%;
+}
+.label{
+font-size:12px;
+opacity:.6;
+margin-bottom:6px;
+}
+.logoText{
+font-size:48px;
+font-weight:700;
+background:linear-gradient(90deg,#00f0ff,#a855f7);
+-webkit-background-clip:text;
+color:transparent;
+}
+.headline{
+font-size:22px;
+margin:10px 0;
+}
+.desc{
+font-size:14px;
+opacity:.7;
+}
+.cta{
+margin-top:16px;
+padding:10px 20px;
+border-radius:30px;
+background:linear-gradient(90deg,#00f0ff,#a855f7);
+border:none;
+color:#fff;
+cursor:pointer;
+transition:.3s cubic-bezier(.22,1,.36,1);
+}
+.cta:hover{
+transform:translateY(-3px) scale(1.03);
+box-shadow:0 0 20px #00f0ff88;
+}
+
+/* IMAGE */
+.right img{
+width:260px;
+animation:float 4s ease-in-out infinite;
+filter:drop-shadow(0 0 20px #00f0ff55);
+}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-15px)}
+}
+
+/* FEATURES */
+.features{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+padding:30px 5vw;
+}
+.card{
+background:rgba(255,255,255,0.05);
+padding:14px;
+border-radius:14px;
+backdrop-filter:blur(10px);
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px #a855f755;
+}
+
+/* SECTIONS */
+.section{
+display:flex;
+justify-content:space-between;
+padding:20px 5vw;
+gap:10px;
+}
+.block{
+flex:1;
+background:rgba(255,255,255,0.05);
+padding:12px;
+border-radius:12px;
+}
+
+/* CTA FINAL */
+.final{
+padding:30px 5vw;
+text-align:center;
+}
+.final button{
+padding:12px 30px;
+border-radius:30px;
+border:none;
+background:linear-gradient(90deg,#00f0ff,#a855f7);
+color:#fff;
+cursor:pointer;
+}
+
+/* ANIMATION */
+.hidden{opacity:0;transform:translateY(30px) scale(.98)}
+.show{opacity:1;transform:none;transition:.6s cubic-bezier(.22,1,.36,1)}
+</style>
+</head>
+
+<body>
+
+<nav><h1>IGD OX</h1></nav>
+
+<section class="hero">
+<div class="left">
+<div class="label">WELCOME TO IGD OX</div>
+<div class="logoText">IGD OX</div>
+<div class="headline">Download Instagram Reels & Posts Instantly</div>
+<div class="desc">Fast, secure and premium downloader built for smooth experience.</div>
+<a href="app.html"><button class="cta">Open Tool</button></a>
+</div>
+
+<div class="right">
+<img src="solo.png">
+</div>
+</section>
+
+<section class="features">
+<div class="card hidden">Fast Download</div>
+<div class="card hidden">HD Quality</div>
+<div class="card hidden">No Login Required</div>
+<div class="card hidden">100% Free</div>
+<div class="card hidden">Secure</div>
+<div class="card hidden">Unlimited Downloads</div>
+</section>
+
+<section class="section">
+<div class="block hidden">Lightning Speed</div>
+<div class="block hidden">Zero Ads</div>
+<div class="block hidden">Clean UI</div>
+</section>
+
+<section class="section">
+<div class="block hidden">Copy Link</div>
+<div class="block hidden">Paste Link</div>
+<div class="block hidden">Download</div>
+</section>
+
+<section class="final">
+<h2>Start Downloading Now</h2>
+<a href="app.html"><button>Go to App</button></a>
+</section>
+
+<script>
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){e.target.classList.add("show")}
+else{e.target.classList.remove("show")}
+})
+},{threshold:.2})
+
+document.querySelectorAll('.hidden').forEach(el=>observer.observe(el))
+</script>
+
+</body>
+</html>
